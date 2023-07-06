@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 
 //계란은 왼쪽부터 들어서 한 번씩만 다른 계란을 칠수 있음 (다른 계란중 하나만 가능)
 //구현, 완전탐색
+//리팩토링
 public class Main {
     static Egg[] eggs;
     static int N;

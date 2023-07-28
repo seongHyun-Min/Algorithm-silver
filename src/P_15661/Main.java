@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    //브루트포스
-    //배열 최적화
     static int[][] arr;
     static int N;
     static boolean[] visited;

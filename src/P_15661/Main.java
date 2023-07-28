@@ -32,22 +32,19 @@ public class Main {
     }
 
     static void DFS(int start, int count) {
-        if (count == N / 2) {
-            int visit = 0;
-            int inVisit = 0;
-            for (int i = 0; i < N; i++) {
-                for (int j = i + 1; j < N; j++) {
-                    if (visited[i] && visited[j]) {
-                        visit += arr[i][j] + arr[j][i];
-                    } else if (!visited[i] && !visited[j]) {
-                        inVisit += arr[i][j] + arr[j][i];
-                    }
+        int visit = 0;
+        int inVisit = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = i + 1; j < N; j++) {
+                if (visited[i] && visited[j]) {
+                    visit += arr[i][j] + arr[j][i];
+                } else if (!visited[i] && !visited[j]) {
+                    inVisit += arr[i][j] + arr[j][i];
                 }
             }
-            int tmp = Math.abs(visit - inVisit);
-            result = Math.min(tmp, result);
-            return;
         }
+        int tmp = Math.abs(visit - inVisit);
+        result = Math.min(tmp, result);
 
         for (int i = start; i < N; i++) {
             visited[i] = true;

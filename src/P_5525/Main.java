@@ -1,35 +1,41 @@
-package P_5525;
+import java.util.*;
+import java.io.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
-public class Main {
-    static String str;
-    static String OI = "OI";
-
-    static int N, M;
-
-    static String target;
-    static long result;
-
-    public static void main(String[] args) throws IOException {
+public class Main
+{
+    static int N;
+    static ArrayList<ArrayList<Node>> arr;
+    static int[] dist;
+    static Queue<Node> q;
+    public static void main(String args[]) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        str = "I";
+        StringTokenizer st;
         N = Integer.parseInt(br.readLine());
-        for (int i = 0; i < N; i++) {
-            str += OI;
+        arr = new ArrayList();
+        for(int i=0; i<=N; i++){
+            arr.add(new ArrayList());
         }
-        result = 0;
-        M = Integer.parseInt(br.readLine());
-        target = br.readLine();
-        for (int i = 0; i < M - str.length(); i++) {
-            if (target.charAt(i) == 'I') {
-                String tmp = target.substring(i, i + str.length());
-                System.out.println(tmp);
-                if (tmp.equals(str)) result++;
-            }
+        for(int i=0; i<N; i++){
+            st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            int weight = Integer.parseInt(st.nextToken());
+            arr.get(start).add(new Node(end ,weight));
+            arr.get(end).add(new Node(start ,weight));
         }
-        System.out.println(result);
+
+
+
+
+    }
+    static class Node{
+        int edge;
+        int weight;
+
+        public Node(int edge, int weight){
+            this.edge =edge;
+            this.weight =weight;
+        }
     }
 }

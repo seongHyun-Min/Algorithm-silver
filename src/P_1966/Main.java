@@ -8,7 +8,8 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-    //중요도가 중복이 있을수 있어 큐에 객체로 넣자
+    //큐를 탐색할때 for-each문을 사용하면 큐의 사이즈의 변경없이
+    //즉, 큐에서 꺼내서 다시 큐에 넣는것이 아니라 큐 내의 내용들을 반복적으로 확인이 가능함
     static int T;
     static int N, M;
     static Queue<Print> q;

@@ -16,25 +16,24 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         A = Integer.parseInt(st.nextToken());
         B = Integer.parseInt(st.nextToken());
-        result = Integer.MAX_VALUE;
+        result = 1;
 
-        DFS(A, 1);
-        if (result == Integer.MAX_VALUE) {
-            System.out.println(-1);
-        } else System.out.println(result);
-    }
-
-    public static void DFS(long start, int count) {
-        if (start <= B) {
-            if (start == B) {
-                result = Math.min(result, count);
-            } else {
-                //2를 곱해
-                DFS(start + 2, count + 1);
-                //1을 오른쪽 추가
-                String tmp = start + "1";
-                DFS(Long.parseLong(tmp), count + 1);
+        while (A <= B) {
+            result++;
+            if (B % 10 == 1) {
+                B /= 10;
+            } else if(B %2 ==0){
+                B /= 2;
+            }else{
+                //못구해
+                break;
             }
+            if(A==B) break;
+        }
+        if(A==B){
+            System.out.println(result);
+        }else{
+            System.out.println(-1);
         }
     }
 }

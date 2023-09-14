@@ -1,54 +1,52 @@
 package P_1205;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Main {
-    static int N, score, P;
-    static int[] arr;
-    static boolean isIn;
-    static int rank;
+class Solution {
+    static int[] dx = {1, 0, -1, 0};
+    static int[] dy = {0, 1, 0, -1};
+    static int N;
+    static int result;
+    static int[][] arr;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        score = Integer.parseInt(st.nextToken());
-        P = Integer.parseInt(st.nextToken());
-        arr = new int[N];
-        if(N ==0){
-            System.out.println(1);
-            System.exit(0);
-        }else{
-            st = new StringTokenizer(br.readLine());
-        }
-
+    public int solution(int[][] board) {
+        N = board.length;
+        result = Integer.MAX_VALUE;
+        arr = new int[N][N];
         for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-        Arrays.sort(arr);
-        isIn = true;
-        //랭킹 리스트에 들어갈수 없는 경우
-        //N이 P와 같은 경우에 리스트에서 작은 값이 들어올 경우
-        if (N == P && score <= arr[0]) {
-            isIn = false;
-            System.out.println(-1);
+            for (int j = 0; j < N; j++) {
+                arr[i][j] = board[i][j];
+                System.out.print(arr[i][j] + " ");
+            }
         }
 
-        rank = 1;
-        if (isIn) {
-            //등수를 구하자
-            for (int i = N - 1; i >= 0; i--) {
-                if (arr[i] > score) {
-                    rank++;
-                }else{
-                    break;
+        DFS(0, 0, 4, 0, 0);
+        return result;
+
+
+    }
+
+    static void DFS(int x, int y, int direct, int count, int edge) {
+        if (x == N - 1 && y == N - 1) {
+            int cost = (100 * count) + (500 * edge);
+            result = Math.min(result, cost);
+        } else {
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if (nx >= 0 && nx < N && ny >= 0 && ny < N && arr[nx][ny] != 1) {
+                    if (direct == 4) {
+                        //첫번째 출발인 경우
+                        DFS(nx, ny, i, count + 1, edge);
+                    } else {
+                        if (direct != i) {
+                            DFS(nx, ny, i, count + 1, edge + 1);
+                        } else {
+                            DFS(nx, ny, i, count + 1, edge);
+                        }
+                    }
                 }
             }
         }
-        System.out.println(rank);
     }
 }
